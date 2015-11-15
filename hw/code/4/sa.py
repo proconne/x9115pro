@@ -41,3 +41,6 @@ for i in xrange(ITERS):
   if len(line) == 25:
     print i - 23, ':{}'.format(e_best), line
     line = ''
+
+print 'x:', x_best
+print 'e:', e_best
