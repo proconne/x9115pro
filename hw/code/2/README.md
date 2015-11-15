@@ -9,5 +9,5 @@ Think3
 
 Think4
 ------
-![image4](think4_1.png)
-![image5](think4_2.png)
+![image4](think4_2.png)
+![image5](think4_3.png)
