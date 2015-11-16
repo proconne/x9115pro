@@ -36,4 +36,4 @@ The test cases used were much smaller than real-world examples, and the scalabil
 The method was not tested on programs with control flow more complicated than if statements and simple loops.
 
 ##### v. Connection
-The paper attempts to solve the same problem as the first (automatic test case generation), and the method is uses (genetic algorithms) is involved in the approach of the first paper.
+The paper attempts to solve the same problem as the first (automatic test case generation), and the method it uses (genetic algorithms) is involved in the approach of the first paper.
