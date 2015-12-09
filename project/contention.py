@@ -3,6 +3,8 @@
 # Project contention model
 #
 
+from math import floor, ceil
+
 BASE_DEV_RATE    = 0.01
 BASE_SR_DEV_RATE = 0.01
 SR_PROD_MULT     = 1.5
@@ -13,7 +15,7 @@ MILESTONE1b = 0.7
 MILESTONE2  = 0.5
 
 MAX_TIME   = 25
-TIME_STEPS = 10
+TIME_STEPS = 26
 
 def run(adjustments):
   hist = []
@@ -25,15 +27,15 @@ def run(adjustments):
   hist.append(state)
 
   while state[4] < 1.0 or state[5] < 1.0:
-    step = state[0] / step_width
-    frac = (step - floor(step))
-    d_proj1_seniors = frac * adjustments[floor(step)] +
-                      (1 - frac) * (adjustments[ceil(step)]
-    d_proj1_complete = BASE_DEV_RATE + sr_dev_rate1 * state[1]
-    d_proj2_complete = BASE_DEV_RATE + sr_dev_rate2 * (1 - state[1])
-
     sr_dev_rate1 = BASE_SR_DEV_RATE + SR_PROD_MULT * state[2]
     sr_dev_rate2 = BASE_SR_DEV_RATE + SR_PROD_MULT * state[3]
+
+    step = state[0] / step_width
+    frac = (step - floor(step))
+    d_proj1_seniors = frac * adjustments[floor(step)] + \
+                      (1 - frac) * adjustments[ceil(step)]
+    d_proj1_complete = BASE_DEV_RATE + sr_dev_rate1 * state[1]
+    d_proj2_complete = BASE_DEV_RATE + sr_dev_rate2 * (1 - state[1])
 
     state = (state[0] + 1,
              min(max(state[1] + d_proj1_seniors, 0), 1),

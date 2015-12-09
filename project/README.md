@@ -5,7 +5,7 @@
 #### Project Contention
 
 Project contention deals with the challenges of allocating resources between
-different projectts. Often, it is tempting to transfer resources such as
+different projects. Often, it is tempting to transfer resources such as
 manpower from one project to another in order to complete short-term goals
 quickly. However, this can have an adverse effect on individual productivity
 which can be harmful in the long term, as when developers switch tasks it
@@ -45,7 +45,7 @@ other project, they gradually forget about the first, and their productivity
 slowly returns to its base level. This simulates the effect discussed above,
 where switching between tasks decreases the productivity of developers.
 
-![model](model.png)
+![model](images/model.png)
 
 The diagram above, taken from the book Software Process Dynamics, shows the
 model using iThink notation. The flows to the "project 1 tasks completed" and
@@ -59,6 +59,25 @@ The input to the model is the "project switch" variable which defines the
 change over time in allocation of developers to each project. This is a
 function that varies over time, and the goal of the optimization algorithm is
 to find a switching schedule that maximizes the objective functions.
+
+### Example Runs
+
+The following graphs show the project completion over time of both projects for
+some simple, fixed allocation schedules:
+
+Keeping the initial allocation of half the senior developers to each project:
+
+![graph1](images/graph1.png)
+
+Switching all of the senior developers between projects at each timestep:
+
+![graph2](images/graph2.png)
+
+Switching all of the senior developers to the project with the next deadline
+(all to Project 1 initially, all to Project 2 when Project 1 achieves 40%
+completion, etc.):
+
+![graph3](images/graph3.png)
 
 #### Objectives
 
