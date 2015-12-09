@@ -1,5 +1,7 @@
 ## Solving Project Contention Using Multiobjective Evolutionary Algorithms
 
+##### Patrick O'Connell
+
 ### Introduction
 
 #### Project Contention
@@ -31,6 +33,33 @@ approach is restrictive in that it forces the user to choose weights for each
 objective, which are often not known a priori. In addition, it is often
 desirable to obtain many different solutions from the algorithm, each of which
 is better than the others in some way.
+
+#### NSGA-II
+
+The optimization algorithm used was NSGA-II, which stands for nondominated
+sorting genetic algorithm (version II). Like any genetic algorithm, NSGA-II
+works by maintaining a set of candidate solutions (the population) while
+generating new ones by combining and mutating previous solutions, and taking
+the best solutions of one generation for use in generating the next. The
+defining characteristic of NSGA-II is how it chooses the solutions to keep in
+the next generation.
+
+To do this, NSGA-II uses the concept of domination: one solution dominates
+another if it does at least as well for every objective. This is not a total
+ordering, as if one solution does better on one objective and the other does
+better on another objective (which is often the case) neither dominates the
+other.
+
+NSGA-II partitions the population into "nondomination levels" where no solution
+on a certain level dominates another solution on that same level, and all
+solutions on a level dominate the solutions on lower levels. At each iteration,
+the new population is made up of the best nondomination levels, however many of
+which are required for the correct population size.
+
+When only part of a level is needed based on the population size, solutions are
+chosen to maximize a second objective, which is diversity. NSGA-II defines a
+metric called the "crowding distance" which takes solutions from diverse parts
+of the boundary in order to explore more of the search space.
 
 ### Model
 
@@ -84,7 +113,7 @@ can then be chosen based on the goals.
 #### Example Runs
 
 The following graphs show the project completion over time of both projects for
-some simple, fixed allocation schedules:
+some simple, fixed allocation schedules.
 
 Keeping the initial allocation of half the senior developers to each project:
 
@@ -99,3 +128,32 @@ Switching all of the senior developers to the project with the next deadline
 completion, etc.):
 
 ![graph3](images/graph3.png)
+
+### Results
+
+The following section shows the project completion graphs of schedules that
+were output by the optimizer. To choose these solutions, a score function was
+defined as a linear combination of the original objective functions, and the
+solution from the population which maximizes the score function was chosen (the
+new score function was not used directly by the optimizer, only to choose from
+the population which was output by NSGA-II).
+
+`score = -obj6`
+
+![graph4](images/graph4.png)
+
+`score = -obj5`
+
+![graph5](images/graph5.png)
+
+`score = -obj4 - obj5`
+
+![graph6](images/graph6.png)
+
+`score = -obj1 - obj2 - obj5`
+
+![graph7](images/graph7.png)
+
+`score = -obj1 - obj2 - obj3 - obj4 - obj5 - obj6`
+
+![graph8](images/graph8.png)

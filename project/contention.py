@@ -4,6 +4,8 @@
 #
 
 from math import floor, ceil
+from nsga_ii import optimize
+from random import gauss, random
 
 BASE_DEV_RATE    = 0.01
 BASE_SR_DEV_RATE = 0.01
@@ -14,10 +16,12 @@ MILESTONE1a = 0.4
 MILESTONE1b = 0.7
 MILESTONE2  = 0.5
 
-MAX_TIME   = 25
-TIME_STEPS = 26
+MAX_TIME   = 100
+TIME_STEPS = 101
+INIT_SD    = 0.1
+MUTATE_SD  = 0.1
 
-def run(adjustments):
+def run(sched):
   hist = []
   step_width = MAX_TIME / (TIME_STEPS - 1)
 
@@ -32,8 +36,8 @@ def run(adjustments):
 
     step = state[0] / step_width
     frac = (step - floor(step))
-    d_proj1_seniors = frac * adjustments[floor(step)] + \
-                      (1 - frac) * adjustments[ceil(step)]
+    d_proj1_seniors = frac * sched[floor(step)] + \
+                      (1 - frac) * sched[ceil(step)]
     d_proj1_complete = BASE_DEV_RATE + sr_dev_rate1 * state[1]
     d_proj2_complete = BASE_DEV_RATE + sr_dev_rate2 * (1 - state[1])
 
@@ -78,3 +82,31 @@ def get_objectives(hist):
   o6 = max(o4, o5)
 
   return (o1, o2, o3, o4, o5, o6)
+
+# create a random schedule for initialization of optimization algorithms
+def generate():
+  return [gauss(0, INIT_SD) for _ in range(TIME_STEPS)]
+
+def score(sched):
+  return get_objectives(run(sched))
+
+def combine(sched1, sched2):
+  sched = [0.0] * TIME_STEPS
+
+  # for each dimension, take the first value, second value or their average,
+  # with equal probability
+  for i in range(TIME_STEPS):
+    x = random()
+
+    if x < 1/3:
+      sched[i] = sched1[i]
+    elif x < 2/3:
+      sched[i] = sched2[i]
+    else:
+      sched[i] = (sched1[i] + sched2[i]) / 2
+
+    sched[i] = gauss(sched[i], MUTATE_SD)
+
+  return sched
+
+pop = optimize(generate, score, combine)
