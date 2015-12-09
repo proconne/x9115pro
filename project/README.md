@@ -16,10 +16,6 @@ maximum productivity. This was studied by software engineers at Litton
 Industries as described by Raymond Madachy in the book Software Process
 Dynamics.
 
-### Related Work
-
-TODO
-
 ### Background
 
 #### Multiobjective Evolutionary Algorithms
@@ -139,12 +135,14 @@ new score function was not used directly by the optimizer, only to choose from
 the population which was output by NSGA-II).
 
 `score = -obj6`
+
 This minimizes the completion time for both projects. The solution
 approximately maintains a constant 50% of developers assigned to each.
 
 ![graph4](images/graph4.png)
 
 `score = -obj5`
+
 This completes Project 2 as soon as possible. The erratic behavior of the
 allocation after Project 2 has finished is due to the fact that the score
 function does not consider the completion time of Project 1 at all.
@@ -152,6 +150,7 @@ function does not consider the completion time of Project 1 at all.
 ![graph5](images/graph5.png)
 
 `score = -obj4 - obj5`
+
 This minimizes the sum of the time taken to complete both projects. Despite the
 fact that it seems similar to the first test (finishing the last project
 as soon as possible) the optimizer chooses to assign all senior developers to
@@ -161,6 +160,7 @@ scores better than keeping a 50/50 split by about 5 points.
 ![graph6](images/graph6.png)
 
 `score = -obj1 - obj2 - obj5`
+
 This score function aims to complete both milestones for Project 1 as soon
 as possible, but then to complete Project 2 as soon as possible after that. As
 would be expected, it initally allocates all resources to Project 1, and
@@ -170,6 +170,7 @@ reached.
 ![graph7](images/graph7.png)
 
 `score = -obj1 - obj2 - obj3 - obj4 - obj5 - obj6`
+
 The last score function attempts to minimize all objectives simultaneously
 with equal weights. It appears to follow the same strategy as the third test,
 finishing one project quickly and switching resources to the other, although
@@ -178,3 +179,18 @@ probably significant due to the fact that there are two early milestones for
 Project 1 and only one for Project 2.
 
 ![graph8](images/graph8.png)
+
+#### Threats to Validity
+
+The main limitation in this report is the simplicity of the part of the model
+representing productivity as a function of time spent on a project. It is
+simplified to the point where it is probably not an accurate reflection of
+reality, and more useful results could be obtained by using either a more
+detailed model or at least one that was learned using statistical data.
+
+### Future Work
+
+As mentioned above, one possible direction for future work would be to test on
+a more detailed model. Another is to try different optimizers; only NSGA-II was
+used, and it would be interesting to compare the quality of solutions found
+with those from other optimizers.
