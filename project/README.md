@@ -60,25 +60,6 @@ change over time in allocation of developers to each project. This is a
 function that varies over time, and the goal of the optimization algorithm is
 to find a switching schedule that maximizes the objective functions.
 
-### Example Runs
-
-The following graphs show the project completion over time of both projects for
-some simple, fixed allocation schedules:
-
-Keeping the initial allocation of half the senior developers to each project:
-
-![graph1](images/graph1.png)
-
-Switching all of the senior developers between projects at each timestep:
-
-![graph2](images/graph2.png)
-
-Switching all of the senior developers to the project with the next deadline
-(all to Project 1 initially, all to Project 2 when Project 1 achieves 40%
-completion, etc.):
-
-![graph3](images/graph3.png)
-
 #### Objectives
 
 The model consists of six objective functions:
@@ -99,3 +80,22 @@ example, `obj4` and `obj5` are directly competing, and attempting to improve
 can be used to obtain a variety of solutions, each of which yields the best
 or near-best results on a subset of the objectives, and the correct solution
 can then be chosen based on the goals.
+
+#### Example Runs
+
+The following graphs show the project completion over time of both projects for
+some simple, fixed allocation schedules:
+
+Keeping the initial allocation of half the senior developers to each project:
+
+![graph1](images/graph1.png)
+
+Switching all of the senior developers between projects at each timestep:
+
+![graph2](images/graph2.png)
+
+Switching all of the senior developers to the project with the next deadline
+(all to Project 1 initially, all to Project 2 when Project 1 achieves 40%
+completion, etc.):
+
+![graph3](images/graph3.png)
