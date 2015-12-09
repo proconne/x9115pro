@@ -69,6 +69,7 @@ The model consists of six objective functions:
   - `obj4`: Time for Project 1 to finish
   - `obj5`: Time for Project 2 to finish
   - `obj6`: Time for both projects to finish (`max(obj4, obj5)`)
+
 The first three represent intermediate milestones where, for example, a
 customer demanded that development reached a certain usable state as soon as
 possible.
