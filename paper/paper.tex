@@ -70,7 +70,8 @@ inefficient techniques such as symbolic execution.
 
 One possible approach to test case generation is to use a search algorithm
 (usually local search) to find in the space of possible inputs the ones that
-maximize code coverage. The search operators depend on the type of the inputs
+maximize code coverage \cite{anand}. The search operators depend on the type of
+the inputs
 to a function; they could be as simple as randomly changing one parameter when
 they are integer-valued, but are more complicated for functions that, for
 example, take as input a complex data structure.
@@ -102,8 +103,8 @@ parameters for different functions would partially negate this. The third
 hypothesis was that test generation would be successful for loops with varying
 numbers of iterations: specifically no iterations, one, two and more than two.
 The last hypothesis was that test cases generated would be adequate, as to be
-confirmed by mutation analysis. After some experimentation he confirmed all of
-these hypotheses to be true.
+confirmed by mutation analysis \cite{demillo1}. After some experimentation he
+confirmed all of these hypotheses to be true.
 
 The first type of function tested was functions with arithmetic and branch
 instructions but no loops. Results on these functions were very good; random
@@ -153,7 +154,8 @@ the additional code has already been generated.
 They benchmarked their approach on six large Java projects. Five were open
 source projects, and to increase the variety of the test code they additionally
 tested on an industrial case study project which Arcuri had previously
-researched. Using these six codebases, they compared the approach to a modified
+researched \cite{arcuri}. Using these six codebases, they compared the approach
+to a modified
 version of their own method that generated individual test
 cases rather than test suites. They kept as many details as possible the same
 between the two methods; they were interested in comparing case-based
