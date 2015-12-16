@@ -4,8 +4,8 @@
 
 from random import randrange, shuffle
 
-POP_SIZE = 50
-ITERS    = 10000
+POP_SIZE = 500
+ITERS    = 1000
 
 goals = [(0, 0, 0, 0, 0, -1), (0, 0, 0, 0, -1, 0), (0, 0, 0, -1, -1, 0), 
          (-1, -1, 0, 0, -1, 0), (-1, -1, -1, -1, -1, -1)]
@@ -56,8 +56,8 @@ def optimize(generate, score, combine):
     pop.append((x, score(x)))
 
   for iter in range(ITERS):
-    if iter % 100 == 0:
-      print('Iteration {}/{}:'.format(iter + 1, ITERS))
+    if iter % 10 == 0:
+      print('Iteration {}/{}:'.format(iter, ITERS))
 
     for i in range(len(goals)):
       for x in pop:
